@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.shop.mapper.CommoditySnatchImageListMapper">
+  <resultMap id="BaseResultMap" type="com.liu.shop.pojo.CommoditySnatchImageList">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="commodity_image" jdbcType="VARCHAR" property="commodityImage" />
+    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, commodity_image, commodity_id
+  </sql>
+  <select id="getCommodityImageByID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from commodity_snatch_image_list
+    where commodity_id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_snatch_image_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commodity_snatch_image_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liu.shop.pojo.CommoditySnatchImageList">
+    insert into commodity_snatch_image_list (id, commodity_image, commodity_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{commodityImage,jdbcType=VARCHAR}, #{commodityId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.liu.shop.pojo.CommoditySnatchImageList">
+    insert into commodity_snatch_image_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commodityImage != null">
+        commodity_image,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="commodityImage != null">
+        #{commodityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liu.shop.pojo.CommoditySnatchImageList">
+    update commodity_snatch_image_list
+    <set>
+      <if test="commodityImage != null">
+        commodity_image = #{commodityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liu.shop.pojo.CommoditySnatchImageList">
+    update commodity_snatch_image_list
+    set commodity_image = #{commodityImage,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

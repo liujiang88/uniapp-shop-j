@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.shop.mapper.SnatchTreasureMapper">
+  <resultMap id="BaseResultMap" type="com.liu.shop.pojo.SnatchTreasure">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="join_person" jdbcType="INTEGER" property="joinPerson" />
+    <result column="balance" jdbcType="INTEGER" property="balance" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="sndelete" jdbcType="INTEGER" property="sndelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, title, image_path, join_person, balance, creat_time, update_time, sndelete
+  </sql>
+ <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from snatch_treasure
+  </select>
+
+
+<!--  <select id="selectImageById" resultMap="ImageSn">-->
+<!--&#45;&#45;     SELECT s.*,c.* from snatch_treasure s,commodity_snatch_image_list  c where s.id=2 and c.commodity_id=s.id-->
+<!--  select  * from snatch_treasure where id=1-->
+<!-- -->
+
+<!--  </select>-->
+
+<!--  <resultMap id="ImageSn" type="SnatchTreasureImage">-->
+<!--      <result column="name" property="name"/>-->
+
+<!--&lt;!&ndash;    <association property="imageLists" javaType="CommoditySnatchImageList">&ndash;&gt;-->
+<!--&lt;!&ndash;      <result property="id" column="id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </association>&ndash;&gt;-->
+
+<!--    <collection property="imageLists" ofType="com.liu.shop.pojo.CommoditySnatchImageList" select="select * from `commodity_snatch_image_list` where commodity_id=2">-->
+<!--    </collection>-->
+
+<!--  </resultMap>-->
+<!--  <select id="aa" resultType="CommoditySnatchImageList">-->
+<!--    select * from commodity_snatch_image_list where commodity_id=#{id}-->
+<!--  </select>-->
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from snatch_treasure
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from snatch_treasure
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liu.shop.pojo.SnatchTreasure">
+    insert into snatch_treasure (id, name, title, 
+      image_path, join_person, balance, 
+      creat_time, update_time, sndelete
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{imagePath,jdbcType=VARCHAR}, #{joinPerson,jdbcType=INTEGER}, #{balance,jdbcType=INTEGER}, 
+      #{creatTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{sndelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.liu.shop.pojo.SnatchTreasure">
+    insert into snatch_treasure
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="imagePath != null">
+        image_path,
+      </if>
+      <if test="joinPerson != null">
+        join_person,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="sndelete != null">
+        sndelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="joinPerson != null">
+        #{joinPerson,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sndelete != null">
+        #{sndelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liu.shop.pojo.SnatchTreasure">
+    update snatch_treasure
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="joinPerson != null">
+        join_person = #{joinPerson,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sndelete != null">
+        sndelete = #{sndelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liu.shop.pojo.SnatchTreasure">
+    update snatch_treasure
+    set name = #{name,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      join_person = #{joinPerson,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=INTEGER},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      sndelete = #{sndelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
